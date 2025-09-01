@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr
 import uuid
 from enum import Enum
-
+from sqlmodel import SQLModel, Field
 
 class Role(str, Enum):
     user = "user"
@@ -41,3 +41,10 @@ class UserUpdateMe(BaseModel):
 
 class AdminUpdateRole(BaseModel):
     role: Role = Role.user
+
+
+class AdminRegister(SQLModel):
+    username: str
+    email: EmailStr = Field(unique=True)
+    hashed_password: str = Field(min_length=8)
+    role: Role = Role.admin  # always admin

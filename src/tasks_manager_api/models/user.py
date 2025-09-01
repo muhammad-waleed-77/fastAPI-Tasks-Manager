@@ -3,11 +3,14 @@ import uuid
 from enum import Enum
 from datetime import datetime, timezone
 from typing import List
+from pydantic import EmailStr
 
 
 class Role(str, Enum):
     user = "user"
     admin = "admin"
+
+
 
 
 class UserTable(SQLModel, table=True):
