@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import PostgresDsn, Field
 from pydantic import EmailStr
-
+import secrets
 
 from pathlib import Path
 
@@ -15,15 +15,16 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    API_V1_STR: str = "/api/v1"
+    PROJECT_NAME: str
+    API_V1_STR: str = "/tasks_manager_api/v1"
 
     DATABASE_URL: str
 
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
 
+    SECRET_KEY:str
 
-
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    
 settings = Settings()
-
-
